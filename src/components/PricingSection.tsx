@@ -55,7 +55,7 @@ const PricingSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto pt-8">
           {models.map((model, index) => (
             <motion.div
               key={model.title}
@@ -63,10 +63,10 @@ const PricingSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative ${model.highlighted ? 'md:-mt-4 md:mb-4' : ''}`}
+              className="relative"
             >
               {model.highlighted && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-primary rounded-full text-xs font-semibold text-primary-foreground">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-gradient-primary rounded-full text-xs font-semibold text-primary-foreground z-10 whitespace-nowrap">
                   Mais popular
                 </div>
               )}
