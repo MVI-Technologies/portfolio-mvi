@@ -93,9 +93,9 @@ const Footer = () => {
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold">D</span>
+                  <span className="text-primary-foreground font-bold">M</span>
                 </div>
-                <span className="font-bold text-2xl">DevFlow</span>
+                <span className="font-bold text-2xl">MVI Tech</span>
               </div>
               <p className="text-muted-foreground max-w-sm">
                 Time dedicado de desenvolvedores criando soluções digitais com processo estruturado e acompanhamento próximo.
@@ -124,7 +124,7 @@ const Footer = () => {
                 <ul className="space-y-3">
                   <li className="flex items-center gap-3 text-muted-foreground">
                     <Mail className="w-4 h-4 text-primary" />
-                    contato@devflow.dev
+                    contato@mvitech.dev
                   </li>
                   <li className="flex items-center gap-3 text-muted-foreground">
                     <MapPin className="w-4 h-4 text-primary" />
@@ -158,7 +158,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} DevFlow. Todos os direitos reservados.
+            © {new Date().getFullYear()} MVI Tech. Todos os direitos reservados.
           </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <a href="#" className="hover:text-foreground transition-colors">
