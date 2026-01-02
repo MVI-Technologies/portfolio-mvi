@@ -3,22 +3,18 @@ import { ExternalLink } from 'lucide-react';
 
 const projects = [
   {
-    title: 'Sistema de Gestão',
-    category: 'Web App',
-    description: 'Plataforma completa para gerenciamento de processos internos.',
-    tags: ['React', 'Node.js', 'PostgreSQL'],
+    title: 'Style Barba',
+    category: 'Landing Page',
+    description: 'Landing page moderna e elegante para barbearia, com design premium, tema escuro e detalhes dourados. Integração com WhatsApp para agendamentos.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
+    link: 'https://style-barba.vercel.app/',
   },
   {
-    title: 'E-commerce B2B',
-    category: 'Loja Virtual',
-    description: 'Loja online com catálogo, carrinho e integração de pagamentos.',
-    tags: ['Next.js', 'Stripe', 'Tailwind'],
-  },
-  {
-    title: 'Dashboard Analytics',
-    category: 'Painel',
-    description: 'Painel de métricas e visualização de dados em tempo real.',
-    tags: ['TypeScript', 'Charts', 'API REST'],
+    title: 'Farmácia Vital Care',
+    category: 'Landing Page',
+    description: 'Landing page institucional para farmácia com foco em conversão via WhatsApp. Design moderno, responsivo e otimizado para dispositivos móveis.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'shadcn/ui'],
+    link: 'https://farm-cia-vital-care.vercel.app/',
   },
 ];
 
@@ -44,8 +40,18 @@ const ProjectsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
+        {projects.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center py-12"
+          >
+            <p className="text-muted-foreground">Em breve, projetos reais serão exibidos aqui.</p>
+          </motion.div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project, index) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
@@ -54,7 +60,13 @@ const ProjectsSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group"
             >
-              <div className="glass rounded-2xl overflow-hidden h-full">
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full"
+              >
+                <div className="glass rounded-2xl overflow-hidden h-full hover:border-primary/50 transition-colors cursor-pointer">
                 {/* Project Preview */}
                 <div className="aspect-video bg-gradient-to-br from-primary/20 via-secondary to-accent/10 relative">
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -93,9 +105,11 @@ const ProjectsSection = () => {
                   </div>
                 </div>
               </div>
+              </a>
             </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
