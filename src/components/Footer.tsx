@@ -1,40 +1,117 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, Github, Linkedin, Mail, MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/hooks/use-toast';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, Github, Linkedin, Mail, MapPin, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 const Footer = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: 'Mensagem enviada!',
-      description: 'Entraremos em contato em breve.',
-    });
-    setFormData({ name: '', email: '', message: '' });
+    setIsLoading(true);
+
+    try {
+      // Configuração do EmailJS
+      const serviceId =
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+      const publicKey =
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+
+      // Validação das credenciais
+      if (serviceId === "YOUR_SERVICE_ID" || publicKey === "YOUR_PUBLIC_KEY") {
+        toast({
+          title: "Configuração necessária",
+          description:
+            "Por favor, configure as credenciais do EmailJS nas variáveis de ambiente.",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      // Parâmetros do email - correspondem ao template do EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        email: formData.email, // Usado no campo "To Email" do template
+        title:
+          formData.message.substring(0, 100) || "Contato através do formulário",
+      };
+
+      // Use o template ID da variável de ambiente ou substitua pelo seu template ID
+      const templateId =
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+
+      if (templateId === "YOUR_TEMPLATE_ID") {
+        toast({
+          title: "Configuração necessária",
+          description:
+            "Por favor, configure o VITE_EMAILJS_TEMPLATE_ID nas variáveis de ambiente com o ID do seu template.",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
+      );
+
+      if (response.status === 200) {
+        toast({
+          title: "Mensagem enviada!",
+          description: "Entraremos em contato em breve.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      }
+    } catch (error: any) {
+      console.error("Erro ao enviar email:", error);
+
+      let errorMessage =
+        "Por favor, tente novamente ou entre em contato diretamente pelo email.";
+
+      // Tratamento específico para erro 422
+      if (error?.status === 422) {
+        errorMessage =
+          "Erro na configuração do template. Verifique se os nomes dos parâmetros no template correspondem aos enviados (from_name, email, title).";
+      } else if (error?.text) {
+        errorMessage = `Erro: ${error.text}`;
+      }
+
+      toast({
+        title: "Erro ao enviar mensagem",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const links = [
-    { label: 'Serviços', href: '#servicos' },
-    { label: 'Como Trabalhamos', href: '#processo' },
-    { label: 'Projetos', href: '#projetos' },
-    { label: 'Contratação', href: '#contratacao' },
-    { label: 'FAQ', href: '#faq' },
+    { label: "Serviços", href: "#servicos" },
+    { label: "Como Trabalhamos", href: "#processo" },
+    { label: "Projetos", href: "#projetos" },
+    { label: "Contratação", href: "#contratacao" },
+    { label: "FAQ", href: "#faq" },
   ];
 
   return (
     <footer id="contato" className="pt-24 pb-8 relative">
       <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-      
+
       <div className="container relative">
         <div className="grid lg:grid-cols-2 gap-16 mb-16">
           {/* Contact Form */}
@@ -54,7 +131,9 @@ const Footer = () => {
                 <Input
                   placeholder="Seu nome"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   required
                   className="bg-secondary border-border"
                 />
@@ -62,7 +141,9 @@ const Footer = () => {
                   type="email"
                   placeholder="Seu e-mail"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   required
                   className="bg-secondary border-border"
                 />
@@ -70,14 +151,30 @@ const Footer = () => {
               <Textarea
                 placeholder="Conte sobre seu projeto..."
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
                 required
                 rows={4}
                 className="bg-secondary border-border resize-none"
               />
-              <Button variant="hero" type="submit" className="w-full sm:w-auto">
-                Enviar mensagem
-                <Send className="w-4 h-4" />
+              <Button
+                variant="hero"
+                type="submit"
+                className="w-full sm:w-auto"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    Enviando...
+                    <Loader2 className="w-4 h-4 animate-spin ml-2" />
+                  </>
+                ) : (
+                  <>
+                    Enviar mensagem
+                    <Send className="w-4 h-4 ml-2" />
+                  </>
+                )}
               </Button>
             </form>
           </motion.div>
@@ -98,7 +195,8 @@ const Footer = () => {
                 <span className="font-bold text-2xl">MVI Tech</span>
               </div>
               <p className="text-muted-foreground max-w-sm">
-                Time dedicado de desenvolvedores criando soluções digitais com processo estruturado e acompanhamento próximo.
+                Time dedicado de desenvolvedores criando soluções digitais com
+                processo estruturado e acompanhamento próximo.
               </p>
             </div>
 
