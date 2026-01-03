@@ -222,7 +222,7 @@ const Footer = () => {
                 <ul className="space-y-3">
                   <li className="flex items-center gap-3 text-muted-foreground">
                     <Mail className="w-4 h-4 text-primary" />
-                    contato@mvitech.dev
+                    mvitech.contato@gmail.com
                   </li>
                   <li className="flex items-center gap-3 text-muted-foreground">
                     <MapPin className="w-4 h-4 text-primary" />
