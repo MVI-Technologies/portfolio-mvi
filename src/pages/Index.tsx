@@ -4,6 +4,7 @@ import ValueProposition from '@/components/ValueProposition';
 import ProcessSection from '@/components/ProcessSection';
 import ServicesSection from '@/components/ServicesSection';
 import ProjectsSection from '@/components/ProjectsSection';
+import WebsiteConfigurator from '@/components/WebsiteConfigurator';
 import PricingSection from '@/components/PricingSection';
 import FAQSection from '@/components/FAQSection';
 import CTASection from '@/components/CTASection';
@@ -19,6 +20,7 @@ const Index = () => {
         <ProcessSection />
         <ServicesSection />
         <ProjectsSection />
+        <WebsiteConfigurator />
         <PricingSection />
         <FAQSection />
         <CTASection />
