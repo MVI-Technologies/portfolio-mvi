@@ -19,7 +19,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="container flex items-center justify-between h-16 md:h-20">
         <a href="#" className="flex items-center">
-          <img src={logoMvitech} alt="MVI Tech" className="h-8 md:h-10" />
+          <img src={logoMvitech} alt="MVI Tech" className="h-7 md:h-8 w-auto" />
         </a>
 
         {/* Desktop Navigation */}
