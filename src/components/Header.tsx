@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import logoMvitech from '@/assets/mvitech-logo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,11 +18,8 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <a href="#" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">M</span>
-          </div>
-          <span className="font-bold text-xl text-foreground">MVI Tech</span>
+        <a href="#" className="flex items-center">
+          <img src={logoMvitech} alt="MVI Tech" className="h-8 md:h-10" />
         </a>
 
         {/* Desktop Navigation */}
