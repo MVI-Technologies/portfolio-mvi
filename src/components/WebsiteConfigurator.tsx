@@ -255,8 +255,7 @@ ${formData.description}
 
                     {!showForm ? (
                       <Button
-                        variant="hero"
-                        className="w-full"
+                        className="w-full bg-primary hover:bg-primary/90 text-white"
                         disabled={selectedFeatures.length === 0}
                         onClick={() => setShowForm(true)}
                       >
@@ -321,7 +320,7 @@ ${formData.description}
                           >
                             Voltar
                           </Button>
-                          <Button type="submit" variant="hero" size="sm" className="flex-1">
+                          <Button type="submit" size="sm" className="flex-1 bg-primary hover:bg-primary/90 text-white">
                             Enviar
                             <Send className="w-3.5 h-3.5 ml-1" />
                           </Button>

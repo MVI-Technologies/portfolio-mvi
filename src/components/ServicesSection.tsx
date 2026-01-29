@@ -1,37 +1,42 @@
 import { motion } from 'framer-motion';
-import { Globe, Server, Palette, Settings, Link2 } from 'lucide-react';
+import { Globe, Server, Palette, Settings, Link2, Smartphone } from 'lucide-react';
 
 const services = [
   {
     icon: Globe,
-    title: 'Desenvolvimento Web',
-    description: 'Sites institucionais, sistemas web, e-commerces e plataformas completas.',
+    title: 'Websites & Landing Pages',
+    description: 'Sites institucionais e landing pages otimizadas para conversão com design profissional e responsivo.',
   },
   {
     icon: Server,
-    title: 'APIs e Back-end',
-    description: 'Desenvolvimento de APIs robustas e arquiteturas escaláveis para sua aplicação.',
+    title: 'Sistemas Web & APIs',
+    description: 'Plataformas completas, dashboards, CRMs e APIs robustas para seu negócio.',
   },
   {
     icon: Palette,
-    title: 'Front-end Moderno',
-    description: 'Interfaces responsivas e intuitivas com as melhores práticas de UX/UI.',
+    title: 'UI/UX Design',
+    description: 'Interfaces modernas e intuitivas focadas na melhor experiência do usuário.',
   },
   {
-    icon: Settings,
-    title: 'Manutenção e Melhorias',
-    description: 'Evolução contínua, correções e novas funcionalidades para sistemas existentes.',
+    icon: Smartphone,
+    title: 'Aplicações Responsivas',
+    description: 'Soluções que funcionam perfeitamente em todos os dispositivos e tamanhos de tela.',
   },
   {
     icon: Link2,
-    title: 'Integrações',
-    description: 'Conexão com serviços externos, APIs de terceiros e automações.',
+    title: 'Integrações & Automações',
+    description: 'Conexão com ERPs, CRMs, gateways de pagamento e serviços externos.',
+  },
+  {
+    icon: Settings,
+    title: 'Manutenção & Suporte',
+    description: 'Evolução contínua, atualizações de segurança e suporte técnico dedicado.',
   },
 ];
 
 const ServicesSection = () => {
   return (
-    <section id="servicos" className="py-24 relative">
+    <section id="servicos" className="py-24 bg-slate-50">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,11 +45,15 @@ const ServicesSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Serviços <span className="text-gradient">oferecidos</span>
+          <span className="inline-block text-sm font-semibold text-primary uppercase tracking-wider mb-4">
+            O que fazemos
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+            Nossos Serviços
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Soluções completas de desenvolvimento para transformar suas ideias em produtos digitais funcionais.
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            Soluções completas de desenvolvimento para transformar suas ideias 
+            em produtos digitais que geram resultados.
           </p>
         </motion.div>
 
@@ -58,9 +67,9 @@ const ServicesSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group"
             >
-              <div className="glass rounded-2xl p-6 h-full transition-all duration-300 hover:border-primary/50 flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-6 h-6 text-primary" />
+              <div className="bg-white rounded-2xl p-6 h-full border border-border shadow-soft hover:shadow-lg hover:border-primary/20 transition-all duration-300 flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                  <service.icon className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold mb-2 text-foreground">{service.title}</h3>
