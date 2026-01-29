@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
-import logoMvitech from "@/assets/mvitech-logo.png";
+import Logo from "@/components/Logo";
 
 const Footer = () => {
   const { toast } = useToast();
@@ -189,8 +189,8 @@ const Footer = () => {
             className="lg:pl-16"
           >
             <div className="mb-8">
-              <div className="flex items-center mb-4">
-                <img src={logoMvitech} alt="MVI Tech" className="h-10" />
+              <div className="mb-4">
+                <Logo size="lg" />
               </div>
               <p className="text-muted-foreground max-w-sm">
                 Time dedicado de desenvolvedores criando soluções digitais com
