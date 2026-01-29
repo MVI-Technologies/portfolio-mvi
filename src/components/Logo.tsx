@@ -5,15 +5,15 @@ interface LogoProps {
 
 const Logo = ({ className = '', size = 'md' }: LogoProps) => {
   const sizes = {
-    sm: { height: 28, iconSize: 28 },
-    md: { height: 36, iconSize: 36 },
-    lg: { height: 48, iconSize: 48 },
+    sm: { iconSize: 28, fontSize: 18, gap: 8 },
+    md: { iconSize: 36, fontSize: 22, gap: 10 },
+    lg: { iconSize: 44, fontSize: 26, gap: 12 },
   };
 
-  const { height, iconSize } = sizes[size];
+  const { iconSize, fontSize, gap } = sizes[size];
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center ${className}`} style={{ gap }}>
       {/* Shield Icon */}
       <svg
         width={iconSize}
@@ -21,6 +21,7 @@ const Logo = ({ className = '', size = 'md' }: LogoProps) => {
         viewBox="0 0 48 48"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        className="flex-shrink-0"
       >
         <defs>
           <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -61,20 +62,13 @@ const Logo = ({ className = '', size = 'md' }: LogoProps) => {
       </svg>
 
       {/* Text */}
-      <div className="flex items-baseline" style={{ height }}>
-        <span 
-          className="font-bold tracking-tight text-foreground"
-          style={{ fontSize: height * 0.65, lineHeight: 1 }}
-        >
-          MVI
-        </span>
-        <span 
-          className="font-bold tracking-tight text-primary"
-          style={{ fontSize: height * 0.65, lineHeight: 1 }}
-        >
-          Tech
-        </span>
-      </div>
+      <span 
+        className="font-bold tracking-tight leading-none"
+        style={{ fontSize }}
+      >
+        <span className="text-foreground">MVI</span>
+        <span className="text-primary">Tech</span>
+      </span>
     </div>
   );
 };
