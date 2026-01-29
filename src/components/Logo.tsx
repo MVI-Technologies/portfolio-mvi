@@ -1,9 +1,10 @@
 interface LogoProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg';
+  variant?: 'default' | 'light';
 }
 
-const Logo = ({ className = '', size = 'md' }: LogoProps) => {
+const Logo = ({ className = '', size = 'md', variant = 'default' }: LogoProps) => {
   const sizes = {
     sm: { iconSize: 28, fontSize: 18, gap: 8 },
     md: { iconSize: 36, fontSize: 22, gap: 10 },
@@ -11,6 +12,8 @@ const Logo = ({ className = '', size = 'md' }: LogoProps) => {
   };
 
   const { iconSize, fontSize, gap } = sizes[size];
+  const textColor = variant === 'light' ? 'text-white' : 'text-foreground';
+  const primaryColor = variant === 'light' ? 'text-blue-300' : 'text-primary';
 
   return (
     <div className={`flex items-center ${className}`} style={{ gap }}>
@@ -25,12 +28,12 @@ const Logo = ({ className = '', size = 'md' }: LogoProps) => {
       >
         <defs>
           <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(210, 100%, 55%)" />
-            <stop offset="100%" stopColor="hsl(210, 100%, 40%)" />
+            <stop offset="0%" stopColor="hsl(217, 91%, 60%)" />
+            <stop offset="100%" stopColor="hsl(217, 91%, 50%)" />
           </linearGradient>
           <linearGradient id="shieldDark" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(210, 100%, 35%)" />
-            <stop offset="100%" stopColor="hsl(210, 100%, 25%)" />
+            <stop offset="0%" stopColor="hsl(217, 91%, 50%)" />
+            <stop offset="100%" stopColor="hsl(217, 91%, 40%)" />
           </linearGradient>
         </defs>
         {/* Shield base */}
@@ -66,8 +69,8 @@ const Logo = ({ className = '', size = 'md' }: LogoProps) => {
         className="font-bold tracking-tight leading-none"
         style={{ fontSize }}
       >
-        <span className="text-foreground">MVI</span>
-        <span className="text-primary">Tech</span>
+        <span className={textColor}>MVI</span>
+        <span className={primaryColor}>Tech</span>
       </span>
     </div>
   );

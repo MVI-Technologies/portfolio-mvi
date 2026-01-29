@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Github, Linkedin, Mail, MapPin, Loader2 } from "lucide-react";
+import { Send, Mail, MapPin, Loader2, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,53 +22,38 @@ const Footer = () => {
     setIsLoading(true);
 
     try {
-      // Configuração do EmailJS
-      const serviceId =
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-      const publicKey =
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
 
-      // Validação das credenciais
       if (serviceId === "YOUR_SERVICE_ID" || publicKey === "YOUR_PUBLIC_KEY") {
         toast({
           title: "Configuração necessária",
-          description:
-            "Por favor, configure as credenciais do EmailJS nas variáveis de ambiente.",
+          description: "Por favor, configure as credenciais do EmailJS nas variáveis de ambiente.",
           variant: "destructive",
         });
         setIsLoading(false);
         return;
       }
 
-      // Parâmetros do email - correspondem ao template do EmailJS
       const templateParams = {
         from_name: formData.name,
-        email: formData.email, // Usado no campo "To Email" do template
-        title:
-          formData.message.substring(0, 100) || "Contato através do formulário",
+        email: formData.email,
+        title: formData.message.substring(0, 100) || "Contato através do formulário",
       };
 
-      // Use o template ID da variável de ambiente ou substitua pelo seu template ID
-      const templateId =
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
 
       if (templateId === "YOUR_TEMPLATE_ID") {
         toast({
           title: "Configuração necessária",
-          description:
-            "Por favor, configure o VITE_EMAILJS_TEMPLATE_ID nas variáveis de ambiente com o ID do seu template.",
+          description: "Por favor, configure o VITE_EMAILJS_TEMPLATE_ID nas variáveis de ambiente.",
           variant: "destructive",
         });
         setIsLoading(false);
         return;
       }
 
-      const response = await emailjs.send(
-        serviceId,
-        templateId,
-        templateParams,
-        publicKey
-      );
+      const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
       if (response.status === 200) {
         toast({
@@ -79,21 +64,9 @@ const Footer = () => {
       }
     } catch (error: any) {
       console.error("Erro ao enviar email:", error);
-
-      let errorMessage =
-        "Por favor, tente novamente ou entre em contato diretamente pelo email.";
-
-      // Tratamento específico para erro 422
-      if (error?.status === 422) {
-        errorMessage =
-          "Erro na configuração do template. Verifique se os nomes dos parâmetros no template correspondem aos enviados (from_name, email, title).";
-      } else if (error?.text) {
-        errorMessage = `Erro: ${error.text}`;
-      }
-
       toast({
         title: "Erro ao enviar mensagem",
-        description: errorMessage,
+        description: "Por favor, tente novamente ou entre em contato diretamente pelo email.",
         variant: "destructive",
       });
     } finally {
@@ -103,17 +76,14 @@ const Footer = () => {
 
   const links = [
     { label: "Serviços", href: "#servicos" },
-    { label: "Como Trabalhamos", href: "#processo" },
     { label: "Projetos", href: "#projetos" },
-    { label: "Contratação", href: "#contratacao" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Diferenciais", href: "#diferenciais" },
+    { label: "Contato", href: "#contato" },
   ];
 
   return (
-    <footer id="contato" className="pt-24 pb-8 relative">
-      <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
-
-      <div className="container relative">
+    <footer id="contato" className="bg-slate-900 text-white pt-20 pb-8">
+      <div className="container">
         <div className="grid lg:grid-cols-2 gap-16 mb-16">
           {/* Contact Form */}
           <motion.div
@@ -123,8 +93,8 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
           >
             <h3 className="text-2xl font-bold mb-2">Entre em contato</h3>
-            <p className="text-muted-foreground mb-8">
-              Preencha o formulário ou use nossos canais diretos.
+            <p className="text-slate-400 mb-8">
+              Preencha o formulário e retornaremos em até 24 horas.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -132,37 +102,30 @@ const Footer = () => {
                 <Input
                   placeholder="Seu nome"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
-                  className="bg-secondary border-border"
+                  className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500"
                 />
                 <Input
                   type="email"
                   placeholder="Seu e-mail"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
-                  className="bg-secondary border-border"
+                  className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500"
                 />
               </div>
               <Textarea
                 placeholder="Conte sobre seu projeto..."
                 value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 required
                 rows={4}
-                className="bg-secondary border-border resize-none"
+                className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 resize-none"
               />
               <Button
-                variant="hero"
                 type="submit"
-                className="w-full sm:w-auto"
+                className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -189,24 +152,22 @@ const Footer = () => {
             className="lg:pl-16"
           >
             <div className="mb-8">
-              <div className="mb-4">
-                <Logo size="lg" />
-              </div>
-              <p className="text-muted-foreground max-w-sm">
-                Time dedicado de desenvolvedores criando soluções digitais com
-                processo estruturado e acompanhamento próximo.
+              <Logo size="lg" variant="light" />
+              <p className="text-slate-400 max-w-sm mt-4">
+                Desenvolvimento de software sob demanda com processo estruturado, 
+                transparência e foco em resultados reais para seu negócio.
               </p>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-8">
               <div>
-                <h4 className="font-semibold mb-4">Navegação</h4>
+                <h4 className="font-semibold mb-4 text-white">Navegação</h4>
                 <ul className="space-y-3">
                   {links.map((link) => (
                     <li key={link.href}>
                       <a
                         href={link.href}
-                        className="text-muted-foreground hover:text-foreground transition-colors"
+                        className="text-slate-400 hover:text-white transition-colors"
                       >
                         {link.label}
                       </a>
@@ -216,51 +177,36 @@ const Footer = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold mb-4">Contato</h4>
+                <h4 className="font-semibold mb-4 text-white">Contato</h4>
                 <ul className="space-y-3">
-                  <li className="flex items-center gap-3 text-muted-foreground">
+                  <li className="flex items-center gap-3 text-slate-400">
                     <Mail className="w-4 h-4 text-primary" />
-                    mvitech.contato@gmail.com
+                    contato@mvitech.dev
                   </li>
-                  <li className="flex items-center gap-3 text-muted-foreground">
+                  <li className="flex items-center gap-3 text-slate-400">
+                    <Phone className="w-4 h-4 text-primary" />
+                    (11) 99999-9999
+                  </li>
+                  <li className="flex items-center gap-3 text-slate-400">
                     <MapPin className="w-4 h-4 text-primary" />
-                    Remoto - Brasil
+                    São Paulo, Brasil
                   </li>
                 </ul>
-
-                <div className="flex gap-4 mt-6">
-                  <a
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-primary/20 transition-colors"
-                  >
-                    <Github className="w-5 h-5" />
-                  </a>
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center hover:bg-primary/20 transition-colors"
-                  >
-                    <Linkedin className="w-5 h-5" />
-                  </a>
-                </div>
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-slate-500">
             © {new Date().getFullYear()} MVI Tech. Todos os direitos reservados.
           </p>
-          <div className="flex gap-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-foreground transition-colors">
+          <div className="flex gap-6 text-sm text-slate-500">
+            <a href="#" className="hover:text-white transition-colors">
               Política de Privacidade
             </a>
-            <a href="#" className="hover:text-foreground transition-colors">
+            <a href="#" className="hover:text-white transition-colors">
               Termos de Uso
             </a>
           </div>

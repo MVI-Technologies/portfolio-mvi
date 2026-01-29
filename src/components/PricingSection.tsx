@@ -87,7 +87,7 @@ const PricingSection = () => {
                   ))}
                 </ul>
                 <Button 
-                  variant={model.highlighted ? 'hero' : 'heroOutline'} 
+                  variant={model.highlighted ? 'default' : 'outline'} 
                   className="w-full"
                   asChild
                 >

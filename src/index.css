@@ -4,48 +4,49 @@
 
 @layer base {
   :root {
-    /* Dark theme - professional slate/navy */
-    --background: 222 47% 5%;
-    --foreground: 210 40% 96%;
+    /* Light theme - Professional B2B with Blue Royal */
+    --background: 0 0% 99%;
+    --foreground: 222 47% 11%;
 
-    --card: 222 47% 7%;
-    --card-foreground: 210 40% 96%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 222 47% 7%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Deep professional blue */
-    --primary: 210 100% 50%;
+    /* Blue Royal - Main brand color */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
 
-    /* Muted slate secondary */
-    --secondary: 215 25% 15%;
-    --secondary-foreground: 210 40% 96%;
+    /* Neutral secondary */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 215 25% 12%;
-    --muted-foreground: 215 20% 50%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    /* Teal accent - professional yet distinctive */
-    --accent: 173 80% 40%;
+    /* Subtle accent */
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 72% 51%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 25% 14%;
-    --input: 215 25% 14%;
-    --ring: 210 100% 50%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
 
     --radius: 0.625rem;
 
-    /* Custom design tokens - refined gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(210 100% 50%), hsl(173 80% 40%));
-    --gradient-hero: linear-gradient(180deg, hsl(222 47% 5%) 0%, hsl(222 47% 8%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(215 25% 10% / 0.9), hsl(215 25% 7% / 0.7));
-    --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(210 100% 50% / 0.1), transparent 40%);
+    /* Custom design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 50%));
+    --gradient-hero: linear-gradient(180deg, hsl(220 14% 96%) 0%, hsl(0 0% 100%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.9), hsl(220 14% 98% / 0.7));
+    --gradient-section: linear-gradient(180deg, hsl(220 14% 98%) 0%, hsl(0 0% 100%) 100%);
     
-    --shadow-glow: 0 0 50px -15px hsl(210 100% 50% / 0.35);
-    --shadow-card: 0 4px 20px -6px hsl(222 47% 3% / 0.7);
+    --shadow-glow: 0 0 50px -15px hsl(217 91% 60% / 0.25);
+    --shadow-card: 0 4px 20px -6px hsl(222 47% 11% / 0.08);
+    --shadow-soft: 0 2px 15px -3px hsl(222 47% 11% / 0.05);
     
     /* Success - professional green */
     --success: 160 84% 39%;
@@ -86,6 +87,10 @@
     background-image: var(--gradient-card);
   }
 
+  .bg-gradient-section {
+    background-image: var(--gradient-section);
+  }
+
   .shadow-glow {
     box-shadow: var(--shadow-glow);
   }
@@ -94,12 +99,20 @@
     box-shadow: var(--shadow-card);
   }
 
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
   .glass {
-    @apply bg-card/60 backdrop-blur-xl border border-border/50;
+    @apply bg-card/80 backdrop-blur-xl border border-border shadow-soft;
   }
 
   .glass-subtle {
-    @apply bg-card/30 backdrop-blur-md border border-border/30;
+    @apply bg-card/60 backdrop-blur-md border border-border/50;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
 }
 
@@ -109,14 +122,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+  background: hsl(var(--muted));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted));
+  background: hsl(var(--muted-foreground) / 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground));
+  background: hsl(var(--muted-foreground) / 0.5);
 }

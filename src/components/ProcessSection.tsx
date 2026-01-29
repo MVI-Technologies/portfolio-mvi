@@ -87,7 +87,7 @@ const ProcessSection = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="text-center mt-12"
         >
-          <Button variant="hero" size="lg" asChild>
+          <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-white">
             <a href="#contato" className="group">
               Vamos conversar sobre seu projeto
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
